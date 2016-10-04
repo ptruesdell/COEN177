@@ -10,7 +10,8 @@
 
 using namespace std;
 
-int main() {
+// The basic programming task - A simple shell
+int main(int argc, char *argv[]) {
 
 	string command;
 
@@ -27,24 +28,14 @@ int main() {
 			exit(0);
 		}
 		
-		else if (fork() != 0) { /* Fork off child process */
+		else if (pid = fork() != 0) { /* Fork off child process */
 			/* Parent Code */
-			wait(NULL);
+			waitpid(-1, NULL, 0); /* Wait for child to exit */
 		} else {
-			int status;
-			//execl(command, parameters, 0); /* Execute command */
+			execl("/home/ptruesdell/a.out", (char*) NULL);
 			// Exit to avoid memory leak
-			exit(0);
+			exit(1);
 		}
 	}
 }
 
-/*void parseCommand(command) {
-	
-	if (command == "exit") {
-		exit(0);
-	}
-	if (command == "") {
-		
-	}
-}*/
