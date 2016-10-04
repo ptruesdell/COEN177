@@ -35,7 +35,7 @@ int main(int argc, char **argv)
     	if (pids[i] = fork() == 0) {
         // child process
         	for (int n = 0; n < 5; ++n) {
-            	printf("child process: counter=%d\n", ++counter);
+            	printf("child process with I: counter=%d\n", ++counter);
         	}
     	}
     	else if (pids[i] = fork() > 0) {
