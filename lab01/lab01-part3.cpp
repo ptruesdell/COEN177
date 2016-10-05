@@ -12,21 +12,6 @@
 
 using namespace std;
 
-//pid_t pid[19];
-/*
-void runFork(int n) {
-	if (pid[n] == 0) {
-
-	}
-	else if (pid[n] > 0) {
-		pid[n] = fork();
-	}
-	else {
-
-	}
-}
-*/
-
 pid_t pid;
 int childCount = 0;
 
