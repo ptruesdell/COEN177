@@ -18,8 +18,8 @@ int procNum = 0;
 
 int forkTwoChildren() {
 	for (int i = 0; i < 2; i++) {
+		++children;
 		pid = fork();
-		children++;
 
 		if (pid < 0) {
 			// Error handling
@@ -28,7 +28,7 @@ int forkTwoChildren() {
 		}
 		else if (pid == 0) {
 			// Child code
-			cout << "I'm a child process with ID: " << getpid() << " and PARENT: " << getppid() << endl;
+			cout << "I'm a child process with ID: " << getpid() << " and PARENT: " << getppid() << " - Child num: " << children << endl;
 			return children;
 		}
 		else {
@@ -44,8 +44,8 @@ int forkTwoChildren() {
 
 int forkThreeChildren() {
 	for (int i = 0; i < 3; i++) {
+		++children;
 		pid = fork();
-		children++;
 
 		if (pid < 0) {
 			// Error handling
@@ -54,7 +54,7 @@ int forkThreeChildren() {
 		}
 		else if (pid == 0) {
 			// Child code
-			cout << "I'm a child process with ID: " << getpid() << " and PARENT: " << getppid() << endl;
+			cout << "I'm a child process with ID: " << getpid() << " and PARENT: " << getppid() << " - Child num: " << children << endl;
 			return children;
 		}
 		else {
@@ -71,15 +71,15 @@ int forkThreeChildren() {
 int main(int argc, char **argv) {
 	// Fork three children from root
 	//forkTwoChildren();
-	forkThreeChildren();
-
-	switch (forkThreeChildren()) {
-		case 1: forkTwoChildren();
-			break;
-		case 2: forkTwoChildren();
-			break;
-		case 3: break;
-	}
 	
+	int forkNum = forkThreeChildren();
+
+	if (forkNum == 1) {
+		forkNum = forkTwoChildren();
+	}
+	if (forkNum == 2) {
+		forkNum = forkTwoChildren();
+	}
+	cout << "Total # of children: " << children << endl;
 }
 
