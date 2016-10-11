@@ -28,7 +28,7 @@ int forkTwoChildren() {
 		}
 		else if (pid == 0) {
 			// Child code
-			cout << "I'm a child process with ID: " << getpid() << " and PARENT: " << getppid() << " - Child num: " << children << endl;
+			cout << "I'm a child process with ID: " << getpid() << " and PARENT: " << getppid() << endl;
 			return children;
 		}
 		else {
@@ -54,7 +54,7 @@ int forkThreeChildren() {
 		}
 		else if (pid == 0) {
 			// Child code
-			cout << "I'm a child process with ID: " << getpid() << " and PARENT: " << getppid() << " - Child num: " << children << endl;
+			cout << "I'm a child process with ID: " << getpid() << " and PARENT: " << getppid() << endl;
 			return children;
 		}
 		else {
@@ -82,7 +82,9 @@ int main(int argc, char **argv) {
 		if (forkNum == 3) {
 			forkThreeChildren();
 		}
+		if(forkNum == 4) {
+			forkThreeChildren();
+		}
 	}
-	cout << "Total # of children: " << children << endl;
 }
 
