@@ -69,9 +69,6 @@ int forkThreeChildren() {
 }
 
 int main(int argc, char **argv) {
-	// Fork three children from root
-	//forkTwoChildren();
-	
 	int forkNum = forkThreeChildren();
 
 	if (forkNum == 1 || forkNum == 2) {
