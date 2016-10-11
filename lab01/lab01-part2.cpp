@@ -12,46 +12,53 @@
 
 using namespace std;
 
-// The basic programming task - A simple shell
-/*int main(int argc, char *argv[]) {
-	pid_t pid = 0;
+pid_t pid;
+/*int childNum == 0;
 
-	if (pid = fork() == -1) {
-		cout << "Error creating child process, exiting..." << endl;
-	}
-	else if (pid = fork() == 0) {
-		
-	}
-}*/
+void forkChildren(int nChildren) {
 
-int main(int argc, char **argv)
-{
-    printf("--beginning of program\n");
+  pid = fork();
 
-    int counter = 0;
-    pid_t pids[16];
-
-    for (int i = 0; i < 16; ++i) {
-    	if (pids[i] = fork() == 0) {
-        // child process
-        	for (int n = 0; n < 5; ++n) {
-            	printf("child process with I: counter=%d\n", ++counter);
-        	}
-    	}
-    	else if (pids[i] = fork() > 0) {
-        	// parent process
-        	for (int m = 0; m < 5; ++m) {
-            	printf("parent process: counter=%d\n", ++counter);
-        	}
-    	}
-    	else {
-        	// fork failed
-        	printf("fork() failed!\n");
-        	return 1;
-    	}
+  if (nChildren > 0) {
+    if (pid == 0) {
+      // Child code runs here
+      cout << "Child PID: " << getpid() << endl; 
+      exit(0);
     }
+    else if (pid > 0) {
+      // Parent code runs here
+      cout << "Parent PID: " << getpid() << endl;
+      forkChildren(nChildren - 1);
+      waitpid(); /* Wait for child process to terminate */
+  //  }
+    //else {
+      // Error handling
+      //cout << "Failed to fork, exiting..." << getpid() << endl;
+      //exit(1);
+   // }
+ // }
+//}
 
-    printf("--end of program--\n");
+int main(int argc, char **argv) 
+{
+  pid = fork();
+  int childNum = 0;
 
-    return 0;
+  for (int i = 0; i < 16; i++) {
+
+    if (pid == 0) {
+      // Child code runs here
+      cout << "Child PID " << ++childNum << ": " << getpid() << endl;
+      pid = fork();
+    }
+    else if (pid > 0) {
+      // Parent code runs here
+      waitpid(-1, NULL, 0);
+    }
+    else {
+      exit(1);
+    }
+  }
+
+  return 0;
 }
