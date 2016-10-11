@@ -74,11 +74,14 @@ int main(int argc, char **argv) {
 	
 	int forkNum = forkThreeChildren();
 
-	if (forkNum == 1) {
+	if (forkNum == 1 || forkNum == 2) {
 		forkNum = forkTwoChildren();
-	}
-	if (forkNum == 2) {
-		forkNum = forkTwoChildren();
+		if (forkNum == 2) {
+			forkThreeChildren();
+		}
+		if (forkNum == 3) {
+			forkThreeChildren();
+		}
 	}
 	cout << "Total # of children: " << children << endl;
 }
